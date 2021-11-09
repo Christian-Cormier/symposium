@@ -2,6 +2,7 @@
 #include <math.h>
 #include <iomanip>
 #include <fstream>
+#include <conio.h>
 using namespace std;
 
 
@@ -10,68 +11,49 @@ void rt2();
 void splashScreen();
 void beginGame();
 string acheivementsPage();
+void options();
 void outFile();
 void inFile();
+void colorChanger();
 
-// the goal of this function is to begin the game and run each arc in order
-// break the story into arcs in order to make the game more readable and fixeable if bugs occur
-// put into do while to replay or go back
-void beginGame(){
-    cout << "This is the beginning of the game";
-    // clear output on begin game
-    //if(value) or else if(value2) then this ending or this ending. 
-    cout << "You wake up on a bright sunny day feeling the cool winter air beginning to breathe into your room";
-    ofstream outFile;
-    outFile.open("acheive.txt");
-    int count = 1;
-    for(int i = 1; i <= 3; i++){
-        if(i == 1){
-        outFile << "True" << endl;
-    }
-    if(i == 2){
-        outFile << "True" << endl;
-    }
-    if(i == 3){
-        outFile << "True" << endl;
-    }
-    }
-    
-    outFile.close();
-}
 //clears screen --- "\33[h\33[2J"
 
 
-// creates and checks achievements that the player may have made throughout the game
-// I will have read in and out a file in order to save the answers through multiple code runs
-string acheivementsPage(){
-    int count = 1;
-    string data;
-    ifstream inFile;
-    inFile.open("acheive.txt");
-
-    if(!inFile)	
-	{
-        cout<<"File not found!\n";
-        exit(EXIT_FAILURE);
+void colorChanger(){
+    char color;
+    cout << "To change color choose (R)ed, (B)lue, (G)reen or (N) to leave normal" << endl;
+    cin >> color;
+    while(color != 'R' && color != 'B' && color != 'G' && color != 'N'){
+        cout << "Invalid color! Please enter R, B, G, or N" << endl;
+        cin >> color;
     }
-
-    while( inFile >> data){
-        if (count == 1 && data == "True"){
-            cout << "Wonderful Student: Achieve the good ending" << endl;
-        }
-        else if(count == 2 && data == "True"){
-            cout << "Amazing partier: Achieve the bad ending" << endl;
-        }
-        else if (count == 3 && data == "True"){
-            cout << "In-Betweener: Achieve the best ending" << endl;
-        }
-        count ++;
+    if(color == 'R'){
+        system("color 0C");
     }
-    inFile.close();
-    return "hello";
+    else if(color == 'B'){
+        system("color 09");
+    }
+    else if(color == 'G'){
+        system("color 0A");
+    }
+    else if(color == 'N'){
+        system("color 07");
+    }
 }
 
-
+void options(){
+    char option;
+    cout << "What setting would you like to change?" << endl;
+    cout << "(C)olor, ?, ?" << endl;
+    cin >> option;
+    while(option != 'C'){
+        cout << "invalid option! Please enter C" << endl;
+        cin >> option;
+    }
+    if(option == 'C'){
+        colorChanger();
+    }
+}
 
 
 
@@ -107,7 +89,7 @@ int main(){
             case 2: acheivementsPage(); //show achievements page
                     break;
 
-            case 3: cout << "This is the option page" << endl; //show whatever I have written for option 3;
+            case 3: options(); //show whatever I have written for option 3;
                     break;
 
             case 4: cout << "Thanks for playing!!!" << endl;
@@ -183,4 +165,61 @@ void outFile(){
         outFile << i << endl;
     }
     outFile.close();
+}
+
+// the goal of this function is to begin the game and run each arc in order
+// break the story into arcs in order to make the game more readable and fixeable if bugs occur
+// put into do while to replay or go back
+void beginGame(){
+    cout << "This is the beginning of the game" << endl;
+    // clear output on begin game
+    //if(value) or else if(value2) then this ending or this ending. 
+    cout << "You wake up on a bright sunny day feeling the cool winter air beginning to breathe into your room" << endl;
+    ofstream outFile;
+    outFile.open("acheive.txt");
+    int count = 1;
+    for(int i = 1; i <= 3; i++){
+        if(i == 1){
+        outFile << "True" << endl;
+    }
+    if(i == 2){
+        outFile << "True" << endl;
+    }
+    if(i == 3){
+        outFile << "True" << endl;
+    }
+    }
+    
+    outFile.close();
+}
+
+
+// creates and checks achievements that the player may have made throughout the game
+// I will have read in and out a file in order to save the answers through multiple code runs
+string acheivementsPage(){
+    int count = 1;
+    string data;
+    ifstream inFile;
+    inFile.open("acheive.txt");
+
+    if(!inFile)	
+	{
+        cout<<"File not found!\n";
+        exit(EXIT_FAILURE);
+    }
+
+    while( inFile >> data){
+        if (count == 1 && data == "True"){
+            cout << "Wonderful Student: Achieve the good ending" << endl;
+        }
+        else if(count == 2 && data == "True"){
+            cout << "Amazing partier: Achieve the bad ending" << endl;
+        }
+        else if (count == 3 && data == "True"){
+            cout << "In-Betweener: Achieve the best ending" << endl;
+        }
+        count ++;
+    }
+    inFile.close();
+    return "hello";
 }
