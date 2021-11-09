@@ -187,18 +187,18 @@ void beginGame(){
     cout<<"Here will be present the opportunties (if-statements) the player is presented with throughout day 2. We are still working on the finer details "<<endl;
     cout<<"of the story."<<endl;
 
-    char choice;
+    char answer;
     cout<<"Will you attend your friends house? If so, enter Y. If not, enter N."<<endl;
-    cin>>choice;
+    cin>>answer;
     
     //input validation
-    while (choice != 'Y' && choice != 'y' && choice != 'N' && choice != 'n')
+    while (answer != 'Y' && answer != 'y' && answer != 'N' && answer != 'n')
     {
         cout<<"Invalid input. Please type either Y or N. Y for yes, N for no."<<endl;
-        cin>>choice;
+        cin>>answer;
     }
     
-    if(choice ==  'Y' || choice == 'y')
+    if(answer ==  'Y' || answer == 'y')
     {
         cout<<"You decide to attend your friends place at Momentum Village. Turns out she invited TONS of people."<<endl;
 		cout<<"There are up to 40 people in this little, now jam packed apartment."<<endl;
@@ -207,7 +207,7 @@ void beginGame(){
              //update points
     }
     
-    if(choice == 'N' || choice == 'n')
+    if(answer == 'N' || answer == 'n')
     {
         cout<<"As originally intended, you decide to study versus going to your friend's house. You feel slightly proud of yourself for not giving into "
         "the temptation of that apparent party. Now's a good time to get some quality study time in.";
