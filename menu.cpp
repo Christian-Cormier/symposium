@@ -15,6 +15,8 @@ void options();
 void outFile();
 void inFile();
 void colorChanger();
+void day(int &a);
+float realStudytime(int);
 
 //clears screen --- "\33[h\33[2J"
 
@@ -175,6 +177,69 @@ void beginGame(){
     // clear output on begin game
     //if(value) or else if(value2) then this ending or this ending. 
     cout << "You wake up on a bright sunny day feeling the cool winter air beginning to breathe into your room" << endl;
+
+    int a =0;
+    int dayCounter = 0;
+    day(a);
+    cout<<"Here will be present the opportunties (if-statements) the player is presented with throughout day 1. We are still working on the finer details "<<endl;
+    cout<<"of the story."<<endl<<endl;
+    day(a);
+    cout<<"Here will be present the opportunties (if-statements) the player is presented with throughout day 2. We are still working on the finer details "<<endl;
+    cout<<"of the story."<<endl;
+
+    char choice;
+    cout<<"Will you attend your friends house? If so, enter Y. If not, enter N."<<endl;
+    cin>>choice;
+    
+    //input validation
+    while (choice != 'Y' && choice != 'y' && choice != 'N' && choice != 'n')
+    {
+        cout<<"Invalid input. Please type either Y or N. Y for yes, N for no."<<endl;
+        cin>>choice;
+    }
+    
+    if(choice ==  'Y' || choice == 'y')
+    {
+        cout<<"You decide to attend your friends place at Momentum Village. Turns out she invited TONS of people."<<endl;
+		cout<<"There are up to 40 people in this little, now jam packed apartment."<<endl;
+		cout<<"There are lights flashing everywhere and music is ABSOLUTELY BLARING. You dance all night without a care in the world, "<<endl;
+        cout<<"you had a great time, you think. You also wake up the next morning with an awful migraine.";
+             //update points
+    }
+    
+    if(choice == 'N' || choice == 'n')
+    {
+        cout<<"As originally intended, you decide to study versus going to your friend's house. You feel slightly proud of yourself for not giving into "
+        "the temptation of that apparent party. Now's a good time to get some quality study time in.";
+        //update points?
+    }
+
+    int choice = 0;
+    
+    cout<<"You decide you are going to study for either 1, 2, or 3 hours when you get home in preparation for finals."<<endl;
+    cout<<"How many hours will you study for (1-3)?"<<endl;
+    cin>>choice;
+    
+    //input validation
+    while (choice != 1 && choice != 2 && choice != 3)
+    {
+        cout<<"Invalid input. You can only study either 1, 2, or 3 hours. Any longer (or shorter) is not ideal, don't you think?"<<endl;
+        cout<<"Please input either 1, 2 or 3."<<endl;
+        cin>>choice;
+    }
+    
+    //if-statement in form of switch statement
+    switch (choice)
+    {
+        case 1: cout<<"You end up only studying for "<< realStudytime(choice) << " minutes due to how distracting TikTok is!"<<endl;
+            break;
+        case 2: cout<<"You end up only studying for "<< realStudytime(choice) << " hour due to how distracting TikTok is!"<<endl;
+            break;
+        case 3: cout<<"You end up only studying for "<< realStudytime(choice) << " hours due to how distracting TikTok is!"<<endl;
+        //no default needed due to input validation previously
+    }
+
+
     ofstream outFile;
     outFile.open("acheive.txt");
     int count = 1;
@@ -222,4 +287,27 @@ string acheivementsPage(){
     }
     inFile.close();
     return "hello";
+}
+
+void day(int &a)
+{
+    a+=1;
+    cout<<"It is now day "<<a<<"."<<endl;
+}
+
+//function that showcases how much time the user will really study (only half of the original time due to the distractiveness of TikTok!)
+float realStudytime(int x)
+{
+    if (x == 1)
+    {
+        float y;
+        y = 60/2.0;
+        return y;
+    }
+    else
+    {
+        float y;
+        y = x/2.0;
+        return y;
+    }
 }
