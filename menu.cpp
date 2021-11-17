@@ -10,17 +10,19 @@ void rt1();
 void rt2();
 void splashScreen();
 void beginGame();
-string acheivementsPage();
+void acheivementsPage();
 void options();
 void outFile();
 void inFile();
 void colorChanger();
 void day(int &a);
 float realStudytime(int);
+void scoreboard();
+void createScore(int);
 
 //clears screen --- "\33[h\33[2J"
-
-
+string arr[3] = {"True","True","True"};
+//changes color of text
 void colorChanger(){
     char color;
     cout << "To change color choose (R)ed, (B)lue, (G)reen or (N) to leave normal" << endl;
@@ -43,6 +45,39 @@ void colorChanger(){
     }
 }
 
+void createScore(int score){
+    ifstream inFile;
+    inFile.open("acheive.txt");
+    int scores;
+    if(!inFile)	
+	{
+        cout<<"File not found!\n";
+        exit(EXIT_FAILURE);
+    }
+
+    while( inFile >> scores){
+        cout << "Score: " << score;
+    }
+    inFile.close();
+}
+void scoreboard(){
+    ifstream inFile;
+    inFile.open("acheive.txt");
+    int scores;
+    if(!inFile)	
+	{
+        cout<<"File not found!\n";
+        exit(EXIT_FAILURE);
+    }
+
+    while( inFile >> scores){
+        cout << "Score: " << scores;
+    }
+    inFile.close();
+}
+
+
+//make a secret function and swap options for scoreboard
 void options(){
     char option;
     cout << "What setting would you like to change?" << endl;
@@ -261,32 +296,20 @@ void beginGame(){
 
 // creates and checks achievements that the player may have made throughout the game
 // I will have read in and out a file in order to save the answers through multiple code runs
-string acheivementsPage(){
-    int count = 1;
-    string data;
-    ifstream inFile;
-    inFile.open("acheive.txt");
 
-    if(!inFile)	
-	{
-        cout<<"File not found!\n";
-        exit(EXIT_FAILURE);
-    }
 
-    while( inFile >> data){
-        if (count == 1 && data == "True"){
+void achievementsPage(){
+    for(int i = 0; i < 3; i++){
+        if(arr[i] == "True"){
             cout << "Wonderful Student: Achieve the good ending" << endl;
         }
-        else if(count == 2 && data == "True"){
+        if(arr[i] == "True"){
             cout << "Amazing partier: Achieve the bad ending" << endl;
         }
-        else if (count == 3 && data == "True"){
+        if(arr[i] == "True"){
             cout << "In-Betweener: Achieve the best ending" << endl;
         }
-        count ++;
     }
-    inFile.close();
-    return "hello";
 }
 
 void day(int &a)
