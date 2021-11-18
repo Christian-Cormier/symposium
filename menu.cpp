@@ -46,23 +46,13 @@ void colorChanger(){
 }
 
 void createScore(int score){
-    ifstream inFile;
-    inFile.open("acheive.txt");
-    int scores;
-    if(!inFile)	
-	{
-        cout<<"File not found!\n";
-        exit(EXIT_FAILURE);
-    }
-
-    while( inFile >> scores){
-        cout << "Score: " << score;
-    }
-    inFile.close();
+    ofstream outFile;
+    outFile << score;
+    outFile.close();
 }
 void scoreboard(){
     ifstream inFile;
-    inFile.open("acheive.txt");
+    inFile.open("scoreboard.txt");
     int scores;
     if(!inFile)	
 	{
@@ -78,19 +68,6 @@ void scoreboard(){
 
 
 //make a secret function and swap options for scoreboard
-void options(){
-    char option;
-    cout << "What setting would you like to change?" << endl;
-    cout << "(C)olor, ?, ?" << endl;
-    cin >> option;
-    while(option != 'C'){
-        cout << "invalid option! Please enter C" << endl;
-        cin >> option;
-    }
-    if(option == 'C'){
-        colorChanger();
-    }
-}
 
 
 
@@ -103,7 +80,7 @@ int main(){
                 cout << "| 1.start     2.achievements |" << endl;
             }
             else if(i == 8){
-                cout << "| 3.options    4.exit        |" << endl;
+                cout << "| 3.scoreboard    4.exit        |" << endl;
             }
             else if( i== 0 || i == 10){
                 cout << "------------------------------" << endl;
@@ -115,7 +92,7 @@ int main(){
 
         cin >> option;
 
-        while(option != 1 && option != 2 && option != 3 && option != 4){
+        while(option != 1 && option != 2 && option != 3 && option != 4 && option != 5){
             cout << "invalid input detected please enter another value 1-4" << endl;
             cin >> option;
         }
@@ -126,10 +103,13 @@ int main(){
             case 2: acheivementsPage(); //show achievements page
                     break;
 
-            case 3: options(); //show whatever I have written for option 3;
+            case 3: scoreboard(); //show whatever I have written for option 3;
                     break;
 
             case 4: cout << "Thanks for playing!!!" << endl;
+                    break;
+            case 5: colorChanger();
+                    break;
         }
     }while(option != 4);
 }
