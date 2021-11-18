@@ -1,5 +1,4 @@
-5
-8
-100
-34
-2
+christian:0
+gabe:0
+andrew:0
+gloria:0
