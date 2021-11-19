@@ -26,6 +26,7 @@ void day(int &a);
 float realStudytime(int);
 void scoreboard();
 void createScore(int,string);
+void clearScreen();
 
 string arr[3] = {"False","False","False"};
 
@@ -33,6 +34,7 @@ string arr[3] = {"False","False","False"};
 //this function puts everything together in order to run the game
 int main(){
     splashScreen();
+    clearScreen();
     int option;
     do{
         for(int i = 0; i <= 10; i++){
@@ -58,17 +60,21 @@ int main(){
         }
         switch(option){
             case 1: beginGame();
+                    clearScreen();
                     break;
 
             case 2: acheivementsPage(); //show achievements page
+                    clearScreen();
                     break;
 
-            case 3: scoreboard(); //show whatever I have written for option 3;
+            case 3: scoreboard();
+                    clearScreen();
                     break;
 
             case 4: cout << "Thanks for playing!!!" << endl;
                     break;
             case 5: colorChanger();
+                    clearScreen();
                     break;
         }
     }while(option != 4);
@@ -145,7 +151,7 @@ void splashScreen(){
 // this function runs the actual game
 void beginGame(){
     int a =0;
-    int time = 0;
+    char time;
     char choice[9];
     int score = 0;
     string name;
@@ -213,23 +219,20 @@ void beginGame(){
             cout<<"You decide you are going to study for either 1, 2, or 3 hours in preparation for finals."<<endl;
             cout<<"How many hours will you study for (1-3)?"<<endl;
             cin>>time;
-            //input validation
-            while (time != 1 && time != 2 && time != 3)
-            {
-                cout<<"Invalid input. You can only study either 1, 2, or 3 hours. Any longer (or shorter) is not ideal, don't you think?"<<endl;
-                cout<<"Please input either 1, 2 or 3."<<endl;
-                cin>>time;
-            }
-    
             //if-statement in form of switch statement
             switch (time)
             {
-                case 1: cout<<"You end up only studying for "<< realStudytime(time) << " minutes due to how distracting TikTok is!"<<endl;
+                case '1': cout<<"You end up only studying for "<< realStudytime(time) << " minutes due to how distracting TikTok is!"<<endl;
                     break;
-                case 2: cout<<"You end up only studying for "<< realStudytime(time) << " hour due to how distracting TikTok is!"<<endl;
+                case '2': cout<<"You end up only studying for "<< realStudytime(time) << " hour due to how distracting TikTok is!"<<endl;
                     break;
-                case 3: cout<<"You end up only studying for "<< realStudytime(time) << " hours due to how distracting TikTok is!"<<endl;
-                //no default needed due to input validation previously
+                case '3': cout<<"You end up only studying for "<< realStudytime(time) << " hours due to how distracting TikTok is!"<<endl;
+                    break;
+                default:
+                        cout << "Invalid input. Please enter 1,2, or 3" << endl;
+                        cin >> time;
+                   //no default needed due to input validation previously.. note from your upperclassman. The default is the whole point of this statement
+
             }
             score += 1;
             cout<<score<<endl<<endl;
@@ -669,6 +672,7 @@ while (choice[2] != 'Y' && choice[2] != 'y' && choice[2] != 'N' && choice[2] != 
 // creates and checks achievements that the player may have made throughout the game
 // uses an array in order to keep the users achievements until the player exits the game
 void acheivementsPage(){
+    char choice;
     if(arr[0] == "True"){
         cout << "Wonderful Student: Achieve the good ending" << endl;
     }
@@ -676,7 +680,17 @@ void acheivementsPage(){
         cout << "Amazing partier: Achieve the bad ending" << endl;
     }
     if(arr[2] == "True"){
-        cout << "In-Betweener: Achieve the best ending" << endl;
+        cout << "In-Betweener: Achieve the best ending" << endl << endl;
+    }
+    cout << "Press [Y] to go back to menu!" << endl;
+    cin >> choice;
+    while (choice != 'Y' && choice != 'y')
+        {
+            cout<<"Please type [Y]."<<endl;
+            cin>>choice;
+        }
+    if(choice == 'Y' || choice == 'y'){
+        clearScreen();
     }
 }
 
@@ -709,6 +723,7 @@ float realStudytime(int x)
 //colorChanger()
 //changes color of text based on the users choice
 void colorChanger(){
+    string str;
     char color;
     cout << "To change color choose (R)ed, (B)lue, (G)reen or (N) to leave normal" << endl;
     cin >> color;
@@ -744,6 +759,7 @@ void createScore(int score,string name){
         outFile << name << ":" << score << endl;
     }
     outFile.close();
+    inFile.close();
 }
 
 
@@ -753,6 +769,7 @@ void scoreboard(){
     ifstream inFile;
     inFile.open("scoreboard.txt");
     string scores;
+    char choice;
     if(!inFile)	
 	{
         cout<<"File not found!\n";
@@ -763,4 +780,18 @@ void scoreboard(){
         cout << scores << endl;
     }
     inFile.close();
+    cout << "Press [Y] to go back to menu!" << endl;
+    cin >> choice;
+    while (choice != 'Y' && choice != 'y')
+        {
+            cout<<"Please type [Y]."<<endl;
+            cin>>choice;
+        }
+    if(choice == 'Y' || choice == 'y'){
+        clearScreen();
+    }
+}
+
+void clearScreen(){
+    system("CLS");
 }
