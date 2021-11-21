@@ -468,12 +468,12 @@ else
 }
 
 cout << "DAY OF EXAM";
-if(score < 0)
+if(score < -1)
 {
     cout << "You went the party route! You only had a good time and won at life, but you bombed the test\n";
     cout << "really badly.\n Really really badly.\n I don't think you got a single question right.\n Maybe study a bit more next time...\n";
 }
-else if(score >= 0 && score <= 0)
+else if(score >= -1 && score <= 4)
 {
     cout << "You went the boring route...\n";
     cout << "You did absolutely nothing with your week..\n";
